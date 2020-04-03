@@ -11,7 +11,7 @@ TODOs as well as the number of unchecked TODOs.
 - [x] (Challenge) Add a delete functionality
 
 ## Instructions
-Inside of [index.html](/index.html), you'll find some starter HTML. You shouldn't
+Inside of [index.html](index.html), you'll find some starter HTML. You shouldn't
 need to edit this file at all. Open this file on your computer into any browser
 to run the project. Make sure that [script.js](script.js) and [styles.css](styles.css)
 are in the same local directory. With the file open in your browser, you should
