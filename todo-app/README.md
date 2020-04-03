@@ -16,7 +16,7 @@ need to edit this file at all. Open this file on your computer into any browser
 to run the project. Make sure that [script.js](/script.js) and [styles.css](/styles.css)
 are in the same local directory. With the file open in your browser, you should
 see a `New TODO` button, which `alert`s when clicked. **Your goal will be to get
-this button to create new TODOs.
+this button to create new TODOs.**
 
 Inside [styles.css](/styles.css), you'll find some pre-written CSS for your
 convenience. You shouldn't need to edit this file at all, but feel free to if
