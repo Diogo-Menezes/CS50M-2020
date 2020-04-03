@@ -30,3 +30,8 @@ Good luck!
 If you finish early and are up for a challenge, try adding delete functionality.
 This should be in the form of a button within each TODO that removes that TODO
 when clicked. 
+
+## Checklist
+[x] Text input 
+[x] New todo button creates a new todo
+[x] (Challenge) Add a delete functionality
