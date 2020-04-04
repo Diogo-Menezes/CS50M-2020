@@ -136,7 +136,7 @@ export default class PomodoroScreen extends React.Component {
             <Button
               title='Reset'
               onPress={resetTimerHandler}
-              disabled={!this.state.isActive}
+              // disabled={!this.state.isActive}
             />
           </View>
           <View>
