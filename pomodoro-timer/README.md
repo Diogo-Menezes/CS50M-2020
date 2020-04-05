@@ -7,7 +7,6 @@ version.
 
 ## Tasks
 - [x] Timer should display minutes and seconds in text
-- [x] Timer should display minutes and seconds in text
 - [x] Timer should count down seconds until it reaches 00:00
 - [x] Phone should buzz when timer reaches 0
 - [x] Timers should switch between 25 and 5 minutes
