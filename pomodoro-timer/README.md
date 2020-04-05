@@ -13,9 +13,9 @@ version.
 - [x] Timer should be able to start, stop, and reset
 - [x] (Challenge) Allow the user to input any arbitrary time for the timers (e.g. 5 mins of work time and 5 mins of break)
 
-### Extras
-- [x] The input only accepts numbers
-- [x] The seconds can only go till 59 and the minutes till 99
+- **Extras**
+  - [x] The input only accepts numbers
+  - [x] The seconds can only go till 59 and the minutes till 99
 
 ## Project Requirements
 
