@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  Image
-} from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 import vibrate from '../../utils/vibrate';
 import TextTime from '../../components/TextTime';
@@ -16,7 +9,8 @@ import strings from '../../config/strings';
 
 const DEFAULT_WORK_TIME = 25;
 const DEFAULT_BREAK_TIME = 5;
-const minToSec = mins => mins * 60;
+const minToSec = (mins) => mins * 60;
+const toMMSS = (time) => convertTime(time);
 
 export default class PomodoroScreen extends React.Component {
   state = {
@@ -25,12 +19,9 @@ export default class PomodoroScreen extends React.Component {
     isActive: false,
     title: strings.workTime,
     time: minToSec(DEFAULT_WORK_TIME),
-    isRunning: false
+    isRunning: false,
   };
-
   render() {
-    const toMMSS = time => convertTime(time);
-    
     const startAndPauseHandler = () => {
       console.log('startAndPauseHandler called');
       if (this.state.isActive) {
@@ -55,7 +46,7 @@ export default class PomodoroScreen extends React.Component {
         isActive: false,
         title: strings.workTime,
         time: minToSec(DEFAULT_WORK_TIME),
-        isRunning: false
+        isRunning: false,
       });
     };
 
@@ -71,7 +62,7 @@ export default class PomodoroScreen extends React.Component {
           () =>
             this.setState({
               time: this.state.time - 1,
-              isRunning: true
+              isRunning: true,
             }),
           1000
         );
@@ -91,7 +82,7 @@ export default class PomodoroScreen extends React.Component {
         this.setState({
           title: strings.breakTime,
           workTime: 0,
-          time: this.state.breakTime
+          time: this.state.breakTime,
         });
       } else {
         console.log(strings.breakTime + ' finished');
@@ -115,67 +106,62 @@ export default class PomodoroScreen extends React.Component {
     }
 
     return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          Keyboard.dismiss();
-        }}
-      >
-        <View style={styles.container}>
-          <View style={styles.actionBar}>
-            <Text style={styles.title}>Pomodoro Timer</Text>
-          </View>
-          <View style={styles.timerContainer}>
-            <Text style={styles.timerTitle}>{this.state.title}</Text>
-            <Text style={styles.timer}>{toMMSS(this.state.time)}</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <Button
-              title={!this.state.isActive ? strings.start : strings.pause}
-              onPress={startAndPauseHandler}
-            />
-            <Button
-              title='Reset'
-              onPress={resetTimerHandler}
-              // disabled={!this.state.isActive}
-            />
-          </View>
-          <View>
-            {!this.state.isActive ? (
-              <TextTime
-                minutes={Math.floor(this.state.workTime / 60)}
-                seconds={0}
-                text={strings.workTime}
-                onReceiveTime={this.workTimeHandler}
-              />
-            ) : null}
-            {!this.state.isActive ? (
-              <TextTime
-                minutes={Math.floor(this.state.breakTime / 60)}
-                seconds={0}
-                text={strings.breakTime}
-                onReceiveTime={this.breakTimeHandler}
-              />
-            ) : null}
-          </View>
+      <View style={styles.container}>
+        <View style={styles.actionBar}>
+          <Text style={styles.title}>Pomodoro Timer</Text>
         </View>
-      </TouchableWithoutFeedback>
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerTitle}>{this.state.title}</Text>
+          <Text style={styles.timer}>{toMMSS(this.state.time)}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title={!this.state.isActive ? strings.start : strings.pause}
+            onPress={startAndPauseHandler}
+          />
+          <Button
+            title='Reset'
+            onPress={resetTimerHandler}
+            color="red"
+            // disabled={!this.state.isActive}
+          />
+        </View>
+        <View>
+          {!this.state.isActive ? (
+            <TextTime
+              minutes={Math.floor(this.state.workTime / 60)}
+              seconds={0}
+              text={strings.workTime}
+              onReceiveTime={this.workTimeHandler}
+            />
+          ) : null}
+          {!this.state.isActive ? (
+            <TextTime
+              minutes={Math.floor(this.state.breakTime / 60)}
+              seconds={0}
+              text={strings.breakTime}
+              onReceiveTime={this.breakTimeHandler}
+            />
+          ) : null}
+        </View>
+      </View>
     );
   }
 
-  workTimeHandler = time => {
+  workTimeHandler = (time) => {
     console.log('work time called ' + time);
     //Time in seconds
     this.setState({
       workTime: time,
-      time: time
+      time: time,
     });
   };
 
-  breakTimeHandler = time => {
+  breakTimeHandler = (time) => {
     console.log('break time called ' + time);
     //Time in seconds
     this.setState({
-      breakTime: time
+      breakTime: time,
     });
   };
 }

@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   timeTitle: {
     fontSize: 22,
-    color: 'white',
+    color: 'white'
   },
   flexRow: {
     flexDirection: 'row',
@@ -20,7 +20,6 @@ export default StyleSheet.create({
     color: 'white',
     marginTop: 10,
     marginLeft: 10,
-    alignSelf: 'center',
   },
   input: {
     margin: 10,
