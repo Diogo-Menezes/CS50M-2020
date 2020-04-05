@@ -53,7 +53,6 @@ export default class TextTime extends React.Component {
           <Text style={styles.inputLabel}>Mins: </Text>
           <Input
             value={this.props.minutes.toString()}
-            keyboardType='numeric'
             style={styles.input}
             type={timerType.minutesType}
             onTimeSet={(type, value) => {

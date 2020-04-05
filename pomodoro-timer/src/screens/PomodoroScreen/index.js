@@ -7,8 +7,10 @@ import convertTime from '../../utils/convertTime';
 import styles from './styles';
 import strings from '../../config/strings';
 
-const DEFAULT_WORK_TIME = 25;
-const DEFAULT_BREAK_TIME = 5;
+const DEFAULT_WORK_TIME = 0;
+const DEFAULT_WORK_SEC = 1;
+const DEFAULT_BREAK_TIME = 0;
+const DEFAULT_BREAK_SEC = 5;
 const minToSec = (mins) => mins * 60;
 const toMMSS = (time) => convertTime(time);
 
@@ -35,7 +37,6 @@ export default class PomodoroScreen extends React.Component {
     const resetTimerHandler = () => {
       console.log('reset called');
       //reset to initial state
-
       if (this.state.isRunning) {
         clearTimer();
       }
@@ -97,14 +98,6 @@ export default class PomodoroScreen extends React.Component {
       }
     }
 
-    if (
-      this.state.workTime === 0 &&
-      this.state.isRunning &&
-      this.timer === null
-    ) {
-      setTimer();
-    }
-
     return (
       <View style={styles.container}>
         <View style={styles.actionBar}>
@@ -125,7 +118,7 @@ export default class PomodoroScreen extends React.Component {
           {!this.state.isActive ? (
             <TextTime
               minutes={Math.floor(this.state.workTime / 60)}
-              seconds={0}
+              seconds={DEFAULT_WORK_SEC}
               text={strings.workTime}
               onReceiveTime={this.workTimeHandler}
             />
@@ -133,7 +126,7 @@ export default class PomodoroScreen extends React.Component {
           {!this.state.isActive ? (
             <TextTime
               minutes={Math.floor(this.state.breakTime / 60)}
-              seconds={0}
+              seconds={DEFAULT_BREAK_SEC}
               text={strings.breakTime}
               onReceiveTime={this.breakTimeHandler}
             />
