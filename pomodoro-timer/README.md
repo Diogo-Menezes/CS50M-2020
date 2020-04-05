@@ -17,8 +17,8 @@ version.
 - [x] The input only accepts numbers
 - [x] The seconds can only go till 59 and the minutes till 99
 
-<details><summary>Project Requirements</summary>
-<p>
+## Project Requirements
+
 - You may not import libraries other than the below:
   - `expo`
   - `react`
@@ -29,8 +29,10 @@ version.
 - Phone should buzz when timer reaches 0
 - Timers should switch between 25 and 5 minutes
 - Timer should be able to start, stop, and reset
-  </p>
+
 The aesthetics of the app is up to you!
+
+
 
 ### Challenge (Not Required)
 - Allow the user to input any arbitrary time for the timers (e.g. 5 mins of work time and 5 mins of break)
