@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import Input from '../Input';
-import styles from '../../screens/PomodoroScreen/styles';
+import styles from './styles';
 
 const timerType = {
   minutesType: 'minutesType',
@@ -31,6 +31,8 @@ export default class TextTime extends React.Component {
   };
 
   onTimeSetHandler(type, val) {
+    console.log(`time set handler called,
+    value: ${val}, type: ${type}`);
     if (type === timerType.minutesType) {
       this.handleMinChange(val);
     } else {
@@ -40,8 +42,8 @@ export default class TextTime extends React.Component {
 
   render() {
     return (
-      <View style={styles.timerDetails}>
-        <Text>{this.props.text}</Text>
+      <View style={styles.timerContainer}>
+        <Text style={styles.timeTitle}>{this.props.text}</Text>
         <View style={styles.flexRow}>
           <Text style={styles.inputLabel}>Mins: </Text>
           <Input
@@ -53,8 +55,7 @@ export default class TextTime extends React.Component {
               this.onTimeSetHandler(type, value);
             }}
           />
-        </View>
-        <View style={styles.flexRow}>
+
           <Text style={styles.inputLabel}>Secs: </Text>
           <Input
             value={this.props.seconds.toString()}

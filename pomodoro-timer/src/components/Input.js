@@ -11,7 +11,10 @@ export default class Input extends React.Component {
   state = {
     value: this.props.value,
   };
-
+  componentDidUpdate() {
+    console.log(`update called`);
+    
+  }
   render() {
     const type = this.props.type;
     const handleInput = (value) => {
@@ -31,18 +34,18 @@ export default class Input extends React.Component {
           value = 0;
         }
       }
-
+      this.props.onTimeSet(type, value);
       if (!isNaN(value)) {
         value = value.toString();
       } else value = '';
 
-      this.setState({ value }, this.props.onTimeSet(type, value));
+      this.setState({ value });
     };
 
     return (
       <TextInput
         keyboardType='numeric'
-        style={styles.input}
+        style={[this.props.style]}
         maxLength={2}
         onChangeText={(value) => handleInput(value)}
         value={this.state.value}
