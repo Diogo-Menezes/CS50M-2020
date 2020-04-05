@@ -20,7 +20,7 @@ export default StyleSheet.create({
     marginVertical: 24,
     marginHorizontal: 24,
     paddingTop: 16,
-    backgroundColor: ' rgba(200, 200,200, 0.25)',
+    backgroundColor: ' rgba(125,125,125, 0.15)',
     alignSelf: 'stretch',
     borderRadius: 8,
     paddingBottom: 16,

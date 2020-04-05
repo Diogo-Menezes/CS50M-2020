@@ -119,12 +119,7 @@ export default class PomodoroScreen extends React.Component {
             title={!this.state.isActive ? strings.start : strings.pause}
             onPress={startAndPauseHandler}
           />
-          <Button
-            title='Reset'
-            onPress={resetTimerHandler}
-            color="red"
-            // disabled={!this.state.isActive}
-          />
+          <Button title='Reset' onPress={resetTimerHandler} color='red' />
         </View>
         <View>
           {!this.state.isActive ? (
@@ -153,7 +148,7 @@ export default class PomodoroScreen extends React.Component {
     //Time in seconds
     this.setState({
       workTime: time,
-      time: time,
+      time,
     });
   };
 

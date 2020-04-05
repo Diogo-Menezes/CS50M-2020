@@ -1,6 +1,5 @@
 import { TextInput } from 'react-native';
 import React from 'react';
-import styles from '../screens/PomodoroScreen/styles';
 
 const timerType = {
   minutesType: 'minutesType',
@@ -10,14 +9,13 @@ const timerType = {
 export default class Input extends React.Component {
   state = {
     value: this.props.value,
+    type: this.props.type,
   };
-  componentDidUpdate() {
-    console.log(`update called`);
-    
-  }
+
   render() {
-    const type = this.props.type;
+    const type = this.state.type;
     const handleInput = (value) => {
+      value = value.replace(/[^0-9]/g, '');
       if (type === timerType.minutesType) {
         if (value < 0) {
           value = 0;
@@ -27,18 +25,20 @@ export default class Input extends React.Component {
         }
       }
       if (type === timerType.secondsType) {
-        if (value < 0) {
-          value = 0;
-        }
-        if (value > 60) {
+        if (value < 0 || value >= 60) {
           value = 0;
         }
       }
-      this.props.onTimeSet(type, value);
+      let val;
       if (!isNaN(value)) {
+        val = value;
         value = value.toString();
-      } else value = '';
-
+      }
+      if (value === '') {
+        val = 0;
+        value = '';
+      }
+      this.props.onTimeSet(type, val);
       this.setState({ value });
     };
 

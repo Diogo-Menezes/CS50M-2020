@@ -14,25 +14,30 @@ export default class TextTime extends React.Component {
   state = {
     minutes: this.props.minutes,
     seconds: this.props.seconds,
-    time: minToSec(this.props.minutes) + this.props.seconds,
     field: this.props.text,
   };
 
   handleMinChange = (minString) => {
-    const minutes = minToSec(minString);
-    const time = this.state.time + minutes;
-    this.setState({ time, minutes });
+    //convert to seconds
+    let minutes = +minString;
+    this.setState({ minutes});
+    let time = this.state.seconds + minToSec(minutes);
+    this.sendTime(time);
   };
 
   handleSecChange = (secString) => {
-    const seconds = +secString;
-    const time = this.state.minutes + seconds;
-    this.setState({ time, seconds });
+    let seconds = +secString;
+    this.setState({ seconds });
+    let time = minToSec(this.state.minutes) + seconds;
+    this.sendTime(time);
+  };
+
+  sendTime = (time) => {
+    this.props.onReceiveTime(time);
   };
 
   onTimeSetHandler(type, val) {
-    console.log(`time set handler called,
-    value: ${val}, type: ${type}`);
+    console.log(`time set handler called,value: ${val}, type: ${type}`);
     if (type === timerType.minutesType) {
       this.handleMinChange(val);
     } else {
