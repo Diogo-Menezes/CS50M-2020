@@ -6,7 +6,10 @@ import {
   TextInput,
   FlatList,
   Image,
+  TouchableOpacity,
 } from 'react-native';
+
+import { nav } from '@react-navigation/native';
 
 import * as mockList from '../../mockData';
 
@@ -14,14 +17,19 @@ import * as mockList from '../../mockData';
 import apiKey from '../../key';
 
 const BASE_URL = `http://www.omdbapi.com/?apikey=${apiKey}&s=`;
+const defaultMovies = JSON.stringify(mockList.search.Search);
 
 export default class MainScreen extends React.Component {
   state = {
-    movies: [mockList.search],
+    movies: [],
     query: '',
   };
 
   render() {
+    const { navigation } = this.props;
+    const movies = this.state.movies;
+    const query = this.state.query;
+
     const fetchMovies = async (search) => {
       const url = `${BASE_URL}${search}`;
       let response = await fetch(url);
@@ -29,39 +37,49 @@ export default class MainScreen extends React.Component {
       this.setState({ movies: json.Search });
     };
 
-    const movies = this.state.movies;
-    const query = this.state.query;
+    const navigateToDetail = (movie) => {
+      navigation.navigate('Detail', { movie });
+    };
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Movie Browser</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='Type to search, eg: Back to the future...'
-          onSubmitEditing={() => fetchMovies(query)}
-          onChangeText={(value) => this.setState({ query: value })}
-        />
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder='Type to search, eg: Back to the future...'
+            onSubmitEditing={() => fetchMovies(query)}
+            onChangeText={(value) => this.setState({ query: value })}
+          />
+        </View>
 
-        {movies.length > 0 ? (
+        {movies ? (
           <FlatList
             style={styles.movieList}
             showsVerticalScrollIndicator={false}
             data={movies}
-            keyExtractor={(item) => item.ImdbID}
+            keyExtractor={(item) => item.imdbID}
             renderItem={({ item: movie }) => (
-              <View style={styles.movieContainer}>
-                <Image
-                  style={styles.movieImage}
-                  source={{ uri: movie.Poster }}
-                />
-                <View style={{ width: '60%', alignSelf: 'stretch' }}>
-                  <Text style={styles.movieTitle}>{console.log()}</Text>
-                  <Text style={styles.movieYear}>{`Year: ${movie.Year}`}</Text>
-                  <Text style={styles.movieCategory}>
-                    {`Category: ${movie.Type}`}
-                  </Text>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => navigateToDetail(movie)}
+              >
+                <View style={styles.movieContainer}>
+                  <Image
+                    style={styles.movieImage}
+                    source={{ uri: movie.Poster }}
+                  />
+                  <View style={{ width: '60%', alignSelf: 'stretch' }}>
+                    <Text style={styles.movieTitle}>{movie.Title}</Text>
+                    <Text
+                      style={styles.movieYear}
+                    >{`Year: ${movie.Year}`}</Text>
+                    <Text style={styles.movieCategory}>
+                      {`Category: ${movie.Type}`}
+                    </Text>
+                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
           />
         ) : (
@@ -77,25 +95,32 @@ export default class MainScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     justifyContent: 'flex-start',
   },
   title: {
     alignSelf: 'stretch',
     textAlign: 'center',
-    marginTop: 24,
+    marginTop: 55,
     fontSize: 28,
     fontWeight: 'bold',
+    color: 'white',
   },
-  input: {
+  inputContainer: {
+    alignItems: 'center',
     marginHorizontal: 12,
     marginTop: 16,
+  },
+  input: {
     paddingStart: 8,
     paddingVertical: 4,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 2,
+    borderRadius: 2,
     alignSelf: 'stretch',
-    borderWidth: 2,
-    borderColor: 'grey',
+    maxWidth: 600,
+    color: 'white',
+    fontSize: 18,
   },
   noResultsText: { fontSize: 20, textAlign: 'center' },
   movieList: { marginHorizontal: 12 },
@@ -104,12 +129,13 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: 'rgba(200,200,200,0.25)',
     flexDirection: 'row',
-    marginVertical: 16,
+    marginVertical: 12,
   },
   movieTitle: {
+    color: 'white',
     marginTop: 4,
     fontSize: 22,
-    fontFamily: 'bold',
+    fontWeight: 'bold',
     flexWrap: 'wrap',
   },
   movieImage: {
@@ -119,6 +145,6 @@ const styles = StyleSheet.create({
     height: 120,
     marginRight: 16,
   },
-  movieYear: { fontSize: 14 },
-  movieCategory: { fontSize: 14 },
+  movieYear: { color: 'white', fontSize: 14 },
+  movieCategory: { color: 'white', fontSize: 14 },
 });
