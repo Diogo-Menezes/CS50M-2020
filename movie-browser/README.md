@@ -10,7 +10,7 @@ and view additional information about any movies they select. Check out the
 ## Tasks
 - [x] There should be at least one `StackNavigator`
 - [x] There should be a search screen that allows users to search for movies
-- [ ] You should show more than 10 results if more than 10 results exist
+- [x] You should show more than 10 results if more than 10 results exist
 - [x] There should be a screen that shows additional information about a selected movie
 
 ## Requirements
