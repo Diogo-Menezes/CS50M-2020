@@ -38,4 +38,4 @@ In each folder you can find which tasks needed to be implemented and the code fo
 
 1. <a href="/todo-app">Project 0 - Build a todo list</a>
 2. <a href="/pomodoro-timer"> Project 1 - Build a Pomodoro timer</a>
-3. <a>Project 2 - Build a Movie Browser</a>
+3. <a href="/movie-browser">Project 2 - Build a Movie Browser</a>
